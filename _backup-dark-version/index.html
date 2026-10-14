@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en-AU" class="js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Sattva Homes | Queensland Home Builder</title>
+    <meta name="description" content="A home to love. A builder to trust. Thoughtfully designed homes, with clear answers before you commit. Display home in Willawong, Queensland." />
+    <meta name="theme-color" content="#090d16" />
+    <meta name="color-scheme" content="dark" />
+    <meta property="og:title" content="Sattva Homes | A home to love. A builder to trust." />
+    <meta property="og:description" content="Thoughtfully designed homes, with clear answers before you commit." />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/webp" href="./favicon.webp" />
+    <link rel="preload" as="image" href="./images/hero-night.webp" fetchpriority="high" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "HomeAndConstructionBusiness",
+        "name": "Sattva Homes",
+        "url": "https://sattva.com.au/",
+        "email": "info@sattva.com.au",
+        "telephone": "+61 7 3708 1091",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "71 Waters Street",
+          "addressLocality": "Willawong",
+          "addressRegion": "QLD",
+          "postalCode": "4110",
+          "addressCountry": "AU"
+        }
+      }
+    </script>
+
+    <!-- Logo intro: shown once per visit, before the app loads, so there is no flash of the page underneath. -->
+    <script>
+      try {
+        if (!location.hash && !sessionStorage.getItem('sattva-intro') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          document.documentElement.classList.add('intro-on')
+          sessionStorage.setItem('sattva-intro', '1')
+        } else {
+          document.documentElement.classList.add('ready')
+        }
+      } catch (e) {
+        document.documentElement.classList.add('ready')
+      }
+    </script>
+    <style>
+      html { background: #090d16 }
+      .logo-intro { display: none }
+      html.intro-on { overflow: hidden }
+      html.intro-on .logo-intro {
+        display: grid; place-items: center; position: fixed; inset: 0; z-index: 100; cursor: pointer;
+        background: radial-gradient(60% 50% at 50% 45%, #1a2236 0%, #090d16 70%);
+        animation: intro-out .7s ease 2.9s forwards;
+      }
+      html.intro-on .logo-intro.skip { animation: intro-out .25s ease forwards }
+      .logo-intro .sattva-logo { width: min(84vw, 520px) }
+      @keyframes intro-out { to { opacity: 0; visibility: hidden } }
+
+      .sattva-logo { display: block; height: auto; overflow: visible; stroke: none }
+      .sattva-logo .n { fill: #f4f0e8 }
+      .sattva-logo .g { fill: #c9a06a }
+      .sattva-logo .grow, .sattva-logo .pane path, .sattva-logo .line { transform-box: fill-box }
+      .sattva-logo .grow { transform-origin: 50% 100% }
+      .sattva-logo .pane path { transform-origin: center }
+      .sattva-logo .line-l { transform-origin: right center }
+      .sattva-logo .line-r { transform-origin: left center }
+      .sattva-logo .sweep { stroke-dasharray: 1; stroke-dashoffset: 0 }
+      .sattva-logo .wall-l { animation: sl-grow .39s cubic-bezier(.3,.8,.3,1) .06s both }
+      .sattva-logo .wall-r { animation: sl-grow .39s cubic-bezier(.3,.8,.3,1) .13s both }
+      .sattva-logo .roof { animation: sl-drop .54s .42s both }
+      .sattva-logo .chimney { animation: sl-grow .3s cubic-bezier(.3,1.7,.5,1) .87s both }
+      .sattva-logo .sweep { animation: sl-draw .66s cubic-bezier(.55,0,.35,1) 1.02s both }
+      .sattva-logo .pane path { animation: sl-light .42s ease both; animation-delay: calc(1.53s + var(--i) * .048s) }
+      .sattva-logo .word path { animation: sl-brick .42s both; animation-delay: calc(1.62s + var(--i) * .054s) }
+      .sattva-logo .line { animation: sl-stretch .54s cubic-bezier(.6,0,.2,1) 1.98s both }
+      .sattva-logo .homes path { animation: sl-fade-up .36s ease both; animation-delay: calc(2.01s + var(--i) * .036s) }
+      @keyframes sl-grow { from { transform: scaleY(0) } }
+      @keyframes sl-draw { from { stroke-dashoffset: 1 } }
+      @keyframes sl-stretch { from { transform: scaleX(0) } }
+      @keyframes sl-fade-up { from { opacity: 0; transform: translateY(18px) } }
+      @keyframes sl-light { 0% { transform: scale(0); fill: #c9a06a } 55% { transform: scale(1.12); fill: #c9a06a } 100% { transform: none } }
+      @keyframes sl-drop { 0% { transform: translateY(-260px); opacity: 0; animation-timing-function: cubic-bezier(.55,0,1,.45) } 45% { opacity: 1 } 62% { transform: translateY(0); animation-timing-function: cubic-bezier(0,.55,.45,1) } 78% { transform: translateY(-14px); animation-timing-function: cubic-bezier(.55,0,1,.45) } 100% { transform: none } }
+      @keyframes sl-brick { 0% { transform: translateY(-90px); opacity: 0; animation-timing-function: cubic-bezier(.55,0,1,.45) } 65% { transform: translateY(0); opacity: 1; animation-timing-function: cubic-bezier(0,.55,.45,1) } 82% { transform: translateY(-8px) } 100% { transform: none } }
+      @media (prefers-reduced-motion: reduce) { .logo-intro { display: none !important } }
+    </style>
+  </head>
+  <body>
+    <div class="logo-intro" aria-hidden="true"><svg class="sattva-logo" viewBox="-6 -6 1377 312" aria-hidden="true" focusable="false">
+<defs><mask id="sattva-s" maskUnits="userSpaceOnUse" x="300" y="100" width="640" height="660"><path class="sweep" d="M762 456L763 420L752 392L725 368L690 340L655 314L621 296L585 318L548 343L512 368L500 400L507 432L528 456L560 474L600 489L645 503L690 520L725 540L744 568L746 604L734 634L708 652L668 661L600 661L520 661L440 661L424 650L424 610L424 580" fill="none" stroke="#fff" stroke-width="76" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/></mask></defs>
+<g transform="scale(.622) translate(-378 -196)">
+<path class="n grow wall-l" d="M452 366L395 406L406 400L406 564L442 536L443 373Z"/>
+<path class="n grow wall-r" d="M797 375L795 644L794 646L767 646L749 665L730 678L832 678L832 403L834 403L842 409Z"/>
+<path class="n roof" d="M378 369L378 419L378 420L406 400L406 402L443 375L444 372L622 246L796 372L797 378L832 404L832 403L834 403L864 424L863 372L826 346L622 196Z"/>
+<path class="n grow chimney" d="M764 268L767 301L756 294L756 297L828 350L828 348L819 341L819 269Z"/>
+<path class="g" mask="url(#sattva-s)" d="M765 381L620 275L500 358L492 367L486 376L482 388L481 401L482 415L486 432L493 445L501 456L518 472L544 487L574 499L661 528L693 544L708 558L716 572L718 584L716 603L708 620L699 629L681 640L666 644L650 645L443 645L442 644L441 560L405 588L405 678L672 678L693 675L709 670L723 663L740 652L752 639L762 626L768 610L770 596L771 578L768 560L762 546L752 532L742 522L730 512L703 496L671 484L594 458L564 444L548 432L539 421L534 408L532 396L534 387L538 377L544 368L552 360L582 340L620 320L639 330L666 348L692 368L720 395L738 416L756 448L761 459L764 460Z"/>
+<g class="n pane"><path style="--i:0" d="M520 530L520 558L548 559L548 530Z"/><path style="--i:1" d="M556 530L556 559L585 558L584 530Z"/><path style="--i:2" d="M520 566L520 595L548 595L548 567Z"/><path style="--i:3" d="M556 566L556 595L585 595L584 566Z"/></g>
+</g>
+<g transform="translate(230 -725)">
+<g class="n word"><path style="--i:0" d="M237 756L213 749L181 748L160 753L150 759L142 767L137 777L136 789L138 799L143 808L156 819L190 835L207 844L217 856L219 862L219 870L215 881L205 891L191 896L175 895L164 890L154 882L145 867L138 848L134 848L134 870L135 888L147 894L162 898L180 900L197 899L212 896L222 891L236 879L241 871L244 859L243 844L238 834L229 825L221 820L186 804L169 794L162 786L160 779L160 774L164 764L172 756L186 751L201 752L210 755L218 761L228 774L234 791L238 791Z"/><path style="--i:1" d="M352 746L296 872L283 888L276 893L270 895L270 896L321 897L320 895L308 891L304 886L304 880L306 871L317 846L373 847L374 848L385 872L388 886L388 889L385 892L372 896L372 897L438 897L428 892L418 879L358 748L356 745ZM345 779L371 841L318 840Z"/><path style="--i:2" d="M591 749L462 749L459 787L464 786L473 767L482 758L495 753L510 753L512 754L511 882L510 886L505 891L498 894L490 894L490 897L563 896L562 894L554 894L546 891L541 886L539 881L538 754L539 753L554 753L569 757L574 760L582 769L590 786L595 786Z"/><path style="--i:3" d="M772 749L644 749L641 787L645 786L653 770L657 764L664 758L676 753L692 753L693 754L693 882L691 887L687 891L681 894L671 895L670 897L744 897L744 894L733 893L727 891L723 886L720 880L720 754L721 753L740 753L753 758L763 768L772 786L776 787Z"/><path style="--i:4" d="M975 749L926 750L926 751L936 753L941 758L944 764L943 771L932 800L902 866L875 807L860 766L859 760L861 755L865 752L874 750L875 749L813 749L814 750L822 752L827 759L889 900L893 900L931 820L951 774L957 763L967 754L975 751Z"/><path style="--i:5" d="M1056 745L1053 746L993 874L982 887L977 891L968 895L968 896L1019 896L1019 895L1007 892L1002 885L1002 878L1005 867L1016 846L1072 848L1084 876L1086 888L1082 893L1070 896L1070 898L1136 897L1125 892L1119 886L1113 875L1066 765ZM1045 779L1069 841L1018 841L1017 840Z"/></g>
+<path class="g line line-l" d="M131 978L132 984L310 983L309 977L132 977Z"/>
+<path class="g line line-r" d="M944 982L946 984L1122 984L1123 978L945 977Z"/>
+<g class="g homes"><path style="--i:0" d="M359 948L359 1008L369 1008L370 983L399 982L400 983L400 1008L410 1009L410 948L400 949L399 974L370 974L369 972L369 949Z"/><path style="--i:1" d="M519 950L511 948L496 948L488 952L479 962L474 976L476 990L481 999L490 1007L502 1010L512 1010L526 1004L533 994L537 983L535 968L529 958ZM500 958L509 957L516 960L522 966L526 972L526 980L524 990L518 996L512 1000L502 1000L496 999L490 993L486 987L485 982L486 970L493 961Z"/><path style="--i:2" d="M601 949L601 1009L611 1008L611 969L629 1000L635 1000L654 969L655 1008L665 1008L664 948L655 949L633 986L610 949Z"/><path style="--i:3" d="M735 948L735 1008L779 1009L778 1000L746 1000L745 984L746 983L773 982L773 974L746 974L745 958L778 958L778 949Z"/><path style="--i:4" d="M858 948L850 951L844 958L842 963L844 973L852 980L875 987L878 990L878 995L873 1000L864 1001L854 998L845 993L840 1001L849 1007L856 1009L869 1010L875 1009L883 1005L888 999L889 993L888 985L884 980L879 977L856 970L854 968L853 964L856 959L863 957L871 957L883 962L887 954L882 951L873 948Z"/></g>
+</g>
+</svg></div>
+    <script>
+      // Any click or key skips the intro; it is removed once faded so it never blocks the page.
+      ;(function () {
+        var root = document.documentElement
+        if (!root.classList.contains('intro-on')) return
+        var intro = document.querySelector('.logo-intro')
+        var done = false
+        var skip = function () { intro.classList.add('skip') }
+        var finish = function () {
+          if (done) return
+          done = true
+          root.classList.remove('intro-on')
+          root.classList.add('ready')
+          document.removeEventListener('keydown', skip)
+        }
+        intro.addEventListener('click', skip)
+        document.addEventListener('keydown', skip, { once: true })
+        intro.addEventListener('animationend', function (e) { if (e.animationName === 'intro-out') finish() })
+        setTimeout(finish, 4500)
+      })()
+    </script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

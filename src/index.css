@@ -1,0 +1,302 @@
+@import "tailwindcss";
+@import "@fontsource-variable/newsreader/opsz.css";
+@import "@fontsource-variable/newsreader/opsz-italic.css";
+@import "@fontsource-variable/manrope";
+@import "lenis/dist/lenis.css";
+
+/* Light theme: Sattva navy and bronze on a sky-washed porcelain page, with white frosted glass. */
+@theme {
+  --font-serif: "Newsreader Variable", "Iowan Old Style", Georgia, serif;
+  --font-sans: "Manrope Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --color-paper: #f5f7fa;       /* page background */
+  --color-mist: #eaf0f6;        /* alternate band, footer */
+  --color-ink: #1f2b42;         /* Sattva navy: headings, body text, primary buttons */
+  --color-ink-soft: #4a5872;    /* secondary text */
+  --color-bronze: #aa8455;
+  --color-bronze-deep: #86663f; /* bronze for small text and accents on light backgrounds */
+  --color-bronze-light: #d6b88f;
+  --color-sky: #cfe0f5;
+  --color-sand: #ecdcc2;
+
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ---------- Base ---------- */
+@layer base {
+  :root {
+    color-scheme: light;
+    interpolate-size: allow-keywords;
+  }
+  html {
+    background: var(--color-paper);
+    scroll-padding-top: 96px;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
+  body {
+    margin: 0;
+    min-height: 100svh;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+  h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; text-wrap: balance; color: var(--color-ink); }
+  h1 em, h2 em, h3 em { font-style: italic; color: var(--color-bronze-deep); }
+  p { text-wrap: pretty; }
+  ::selection { background: rgb(170 132 85 / 0.25); color: var(--color-ink); }
+  :focus-visible { outline: 2px solid var(--color-bronze-deep); outline-offset: 4px; border-radius: 6px; }
+  /* Sections focused by in-page links should not draw a focus ring around the whole block. */
+  [tabindex="-1"]:focus { outline: none; }
+}
+
+/* ---------- Glass (white, frosted) ---------- */
+@utility glass {
+  background: linear-gradient(145deg, rgb(255 255 255 / 0.74), rgb(255 255 255 / 0.44));
+  border: 1px solid rgb(255 255 255 / 0.85);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.95),
+    0 24px 60px -30px rgb(31 43 66 / 0.18),
+    0 2px 8px rgb(31 43 66 / 0.04);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+}
+/* More opaque white glass for text-heavy panels over busy photography. */
+@utility glass-strong {
+  background: linear-gradient(145deg, rgb(255 255 255 / 0.86), rgb(255 255 255 / 0.66));
+  border: 1px solid rgb(255 255 255 / 0.9);
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 30px 70px -34px rgb(31 43 66 / 0.22),
+    0 2px 8px rgb(31 43 66 / 0.04);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  backdrop-filter: blur(30px) saturate(180%);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass, .glass-strong { background: rgb(255 255 255 / 0.95); }
+}
+
+/* ---------- Type helpers ---------- */
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  line-height: 1.6;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-bronze-deep);
+}
+@utility display-1 {
+  /* Scales with width, but also with height so the hero fits on short laptop screens. */
+  font-size: clamp(2.6rem, min(1.1rem + 5.2vw, 9.4vh + 0.4rem), 5.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+}
+@utility display-2 {
+  font-size: clamp(2.3rem, 1.5rem + 2.6vw, 3.9rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+/* ---------- Buttons ---------- */
+@layer components {
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+    min-height: 50px; padding: 0 1.6rem; border-radius: 999px;
+    font-size: 14px; font-weight: 600; letter-spacing: 0.01em; white-space: nowrap;
+    transition: background-color .25s, color .25s, border-color .25s, box-shadow .25s, translate .25s;
+  }
+  .btn svg { width: 18px; height: 18px; transition: translate .25s var(--ease-expo); }
+  .btn:hover svg { translate: 3px 0; }
+  .btn-ink { background: var(--color-ink); color: #fff; }
+  .btn-ink:hover { background: #2e3c57; box-shadow: 0 12px 28px -12px rgb(31 43 66 / 0.45); }
+  .btn-outline { border: 1px solid rgb(31 43 66 / 0.35); color: var(--color-ink); background: rgb(255 255 255 / 0.35); }
+  .btn-outline:hover { background: var(--color-ink); color: #fff; border-color: var(--color-ink); }
+  .btn-bronze {
+    background: linear-gradient(135deg, #c39a66, var(--color-bronze) 55%, #96724a);
+    color: #fff;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.35), 0 14px 30px -14px rgb(170 132 85 / 0.8);
+  }
+  .btn-bronze:hover { background: linear-gradient(135deg, #cfa673, #b48c5c 55%, #8f6c43); }
+
+  .link-underline {
+    background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat;
+    padding-bottom: 3px;
+    transition: background-size .35s var(--ease-expo);
+  }
+  .link-underline:hover { background-size: 0 1px; background-position: 100% 100%; }
+  .nav-link {
+    position: relative; padding: 8px 0;
+    background: linear-gradient(var(--color-bronze), var(--color-bronze)) 0 100% / 0 1px no-repeat;
+    transition: background-size .35s var(--ease-expo), color .2s;
+  }
+  .nav-link:hover { background-size: 100% 1px; }
+}
+
+/* ---------- Header ---------- */
+/* Own view-transition layer so the fixed header never cross-fades when collections switch. */
+.site-header { view-transition-name: site-header; }
+::view-transition-group(site-header) { animation: none; }
+.site-header { transition: background-color .4s, border-color .4s, box-shadow .4s, -webkit-backdrop-filter .4s, backdrop-filter .4s; border-bottom: 1px solid transparent; }
+.site-header[data-scrolled="true"] {
+  background: rgb(255 255 255 / 0.72);
+  border-bottom-color: rgb(31 43 66 / 0.07);
+  box-shadow: 0 10px 30px -20px rgb(31 43 66 / 0.18);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  backdrop-filter: blur(22px) saturate(180%);
+}
+
+/* ---------- Hero ---------- */
+.hero-shade { opacity: 0; }
+/* A soft white halo lifts navy type off the sky. */
+.hero-text { text-shadow: 0 1px 24px rgb(255 255 255 / 0.7); }
+
+/* Storeys tabs: underline slides under the active option. */
+.storey-tab { position: relative; padding: 10px 2px; color: var(--color-ink-soft); transition: color .25s; cursor: pointer; }
+.storey-tab::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1.5px; background: var(--color-ink); scale: 0 1; transition: scale .45s var(--ease-expo); }
+.storey-tab:hover { color: var(--color-ink); }
+.storey-tab:has(input:checked) { color: var(--color-ink); font-weight: 600; }
+.storey-tab:has(input:checked)::after { scale: 1 1; }
+.storey-tab:has(input:focus-visible) { outline: 2px solid var(--color-bronze-deep); outline-offset: 4px; border-radius: 4px; }
+
+/* Bedroom / bathroom chips: square keys, the active one filled navy. */
+.chip {
+  display: grid; place-items: center; min-width: 38px; height: 38px; padding: 0 10px;
+  border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer;
+  border: 1px solid rgb(31 43 66 / 0.14); background: rgb(255 255 255 / 0.6); color: var(--color-ink);
+  transition: background-color .2s, color .2s, border-color .2s;
+}
+.chip:hover { border-color: rgb(31 43 66 / 0.4); background: #fff; }
+.chip:has(input:checked), .chip[aria-pressed="true"] { background: var(--color-ink); border-color: var(--color-ink); color: #fff; }
+.chip:has(input:focus-visible) { outline: 2px solid var(--color-bronze-deep); outline-offset: 3px; }
+
+/* On/off switch built from a native checkbox */
+.switch {
+  appearance: none; -webkit-appearance: none; flex-shrink: 0; position: relative; width: 44px; height: 26px; margin: 0;
+  border-radius: 999px; background: rgb(31 43 66 / 0.18); cursor: pointer; transition: background-color .25s;
+}
+.switch::after {
+  content: ''; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%;
+  background: #fff; box-shadow: 0 2px 6px rgb(31 43 66 / 0.25); transition: translate .3s var(--ease-expo);
+}
+.switch:checked { background: var(--color-ink); }
+.switch:checked::after { translate: 18px 0; }
+.switch:focus-visible { outline: 2px solid var(--color-bronze-deep); outline-offset: 3px; }
+
+/* ---------- Home designs ---------- */
+.home-card { transition: border-color .3s, box-shadow .3s, translate .4s var(--ease-expo); }
+.home-card:hover { border-color: var(--color-bronze-light); box-shadow: 0 30px 60px -36px rgb(31 43 66 / 0.45); translate: 0 -3px; }
+@media (prefers-reduced-motion: no-preference) {
+  .tray-in { animation: tray-in .5s var(--ease-expo) both; }
+}
+@keyframes tray-in { from { opacity: 0; translate: 0 24px; } }
+
+/* Dual range slider: two native ranges share one track. */
+.range-pair { position: relative; height: 28px; }
+.range-pair::before {
+  content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 4px; margin-top: -2px; border-radius: 4px;
+  background: linear-gradient(90deg,
+    rgb(31 43 66 / 0.14) calc(10px + (100% - 20px) * var(--low, 0)),
+    var(--color-bronze) calc(10px + (100% - 20px) * var(--low, 0)),
+    var(--color-bronze) calc(10px + (100% - 20px) * var(--high, 1)),
+    rgb(31 43 66 / 0.14) calc(10px + (100% - 20px) * var(--high, 1)));
+}
+.range-pair input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; background: none; appearance: none; -webkit-appearance: none; pointer-events: none; }
+.range-pair input::-webkit-slider-runnable-track { height: 28px; background: none; }
+.range-pair input::-moz-range-track { background: none; }
+.range-pair input::-webkit-slider-thumb { -webkit-appearance: none; pointer-events: auto; width: 20px; height: 20px; margin-top: 4px; border-radius: 50%; background: #fff; border: 2px solid var(--color-bronze); box-shadow: 0 2px 8px rgb(31 43 66 / 0.18); cursor: grab; }
+.range-pair input::-moz-range-thumb { pointer-events: auto; width: 16px; height: 16px; border-radius: 50%; background: #fff; border: 2px solid var(--color-bronze); box-shadow: 0 2px 8px rgb(31 43 66 / 0.18); cursor: grab; }
+.range-pair input:focus-visible { outline: none; }
+.range-pair input:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 3px #fff, 0 0 0 5px var(--color-bronze-deep); }
+.range-pair input:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 3px #fff, 0 0 0 5px var(--color-bronze-deep); }
+
+/* Scroll cue line */
+.scroll-line { position: relative; overflow: hidden; }
+.scroll-line::after { content: ''; position: absolute; inset: 0; background: linear-gradient(transparent, var(--color-ink)); translate: 0 -100%; }
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-line::after { animation: scroll-cue 2.4s var(--ease-expo) infinite; }
+}
+@keyframes scroll-cue { 0% { translate: 0 -100%; } 60%, 100% { translate: 0 100%; } }
+
+/* ---------- Collections ---------- */
+.collection-tab { transition: border-color .3s, box-shadow .3s; }
+.collection-tab[aria-selected="true"] {
+  border-color: var(--color-bronze);
+  box-shadow: 0 0 0 1px var(--color-bronze), 0 24px 50px -28px rgb(31 43 66 / 0.35);
+}
+.collection-tab[aria-selected="true"] .tab-bar { scale: 1 1; }
+.tab-bar { scale: 0 1; transform-origin: left; transition: scale .5s var(--ease-expo); }
+
+/* Switching collection: the new photo wipes in over the old one; everything else cross-fades. */
+.collection-photo { view-transition-name: collection-photo; }
+::view-transition-old(collection-photo),
+::view-transition-new(collection-photo) { height: 100%; object-fit: cover; mix-blend-mode: normal; }
+::view-transition-old(collection-photo) { animation: vt-photo-out .7s var(--ease-expo) both; }
+::view-transition-new(collection-photo) { animation: vt-photo-in .8s var(--ease-expo) both; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: .35s; }
+@keyframes vt-photo-out { to { opacity: 0.4; scale: 1.06; } }
+@keyframes vt-photo-in { from { clip-path: inset(0 0 0 100% round 24px); } to { clip-path: inset(0 round 24px); } }
+
+/* ---------- Family moments ---------- */
+/* Fades the photo's outer edge into the matching sand panel, so no rectangle shows. */
+.feather-edges {
+  mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent), linear-gradient(transparent, #000 3%, #000 97%, transparent);
+  mask-composite: intersect;
+}
+
+/* ---------- FAQ: animated <details> where supported, instant elsewhere ---------- */
+.faq::details-content { block-size: 0; overflow: clip; opacity: 0; transition: block-size .45s var(--ease-expo), opacity .35s, content-visibility .45s allow-discrete; }
+.faq[open]::details-content { block-size: auto; opacity: 1; }
+.faq summary { list-style: none; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq .faq-icon { transition: rotate .35s var(--ease-expo), background-color .25s, color .25s, border-color .25s; }
+.faq[open] .faq-icon { rotate: 45deg; background: var(--color-ink); border-color: var(--color-ink); color: #fff; }
+
+/* ---------- Map card ---------- */
+.map-card { transition: border-color .25s, translate .35s var(--ease-expo), box-shadow .25s; }
+.map-card:hover { border-color: var(--color-bronze-light); translate: 0 -3px; box-shadow: 0 20px 40px -24px rgb(31 43 66 / 0.3); }
+.map-card:hover .map-arrow { translate: 4px 0; }
+.map-arrow { transition: translate .3s var(--ease-expo); }
+
+/* ---------- Motion ---------- */
+/* Hero entrance: waits for the logo intro (html.ready). */
+@media (prefers-reduced-motion: no-preference) {
+  html.js:not(.ready) .rise { opacity: 0; }
+  html.ready .rise { animation: rise 1.2s var(--ease-expo) both; animation-delay: var(--d, 0s); }
+  html.ready .rise-soft { animation-name: rise-soft; }
+}
+@keyframes rise { from { opacity: 0; translate: 0 30px; filter: blur(8px); } }
+/* Glass panels rise without filter so their backdrop blur stays intact. */
+@keyframes rise-soft { from { opacity: 0; translate: 0 30px; } }
+
+/* Scroll-driven effects: progressive enhancement, decorative only. */
+@supports ((animation-timeline: view()) and (animation-range: entry)) {
+  @media (prefers-reduced-motion: no-preference) {
+    .hero { view-timeline: --hero block; }
+    .hero-photo { animation: hero-zoom linear both; animation-timeline: --hero; animation-range: exit 0% exit 100%; }
+    .hero-shade { animation: hero-shade linear both; animation-timeline: --hero; animation-range: exit 0% exit 85%; }
+
+    .reveal { animation: reveal linear both; animation-timeline: view(); animation-range: entry 0% cover 28%; }
+    .reveal-img { animation: reveal-img linear both; animation-timeline: view(); animation-range: entry 0% cover 45%; }
+    .stats-fade { animation: stats-fade linear both; animation-timeline: view(); animation-range: entry 0% entry 100%; }
+    .parallax { animation: parallax linear both; animation-timeline: view(); animation-range: cover 0% cover 100%; }
+  }
+}
+@keyframes hero-zoom { to { scale: 1.12; translate: 0 8%; } }
+@keyframes hero-shade { to { opacity: 1; } }
+@keyframes reveal { from { opacity: 0; translate: 0 48px; } }
+@keyframes reveal-img { from { opacity: 0; scale: 0.94; } }
+@keyframes stats-fade { from { opacity: 0; } }
+@keyframes parallax { from { translate: 0 -6%; } to { translate: 0 6%; } }
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) { animation: none !important; }
+  .faq::details-content { transition: none; }
+}

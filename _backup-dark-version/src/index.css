@@ -1,0 +1,266 @@
+@import "tailwindcss";
+@import "@fontsource-variable/newsreader/opsz.css";
+@import "@fontsource-variable/newsreader/opsz-italic.css";
+@import "@fontsource-variable/manrope";
+@import "lenis/dist/lenis.css";
+
+/* Palette: Sattva navy and bronze, set in a night scene to match the hero photograph. */
+@theme {
+  --font-serif: "Newsreader Variable", "Iowan Old Style", Georgia, serif;
+  --font-sans: "Manrope Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --color-night: #090d16;
+  --color-night-2: #0e1421;
+  --color-navy: #222e44;
+  --color-bronze: #aa8455;
+  --color-bronze-light: #d6b88f;
+  --color-champagne: #ecdcbf;
+  --color-cream: #f4f0e8;
+
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ---------- Base ---------- */
+@layer base {
+  :root {
+    color-scheme: dark;
+    interpolate-size: allow-keywords;
+  }
+  html {
+    background: var(--color-night);
+    scroll-padding-top: 96px;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
+  body {
+    margin: 0;
+    min-height: 100svh;
+    background: var(--color-night);
+    color: var(--color-cream);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+  h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; text-wrap: balance; }
+  h1 em, h2 em, h3 em { font-style: italic; color: var(--color-champagne); }
+  p { text-wrap: pretty; }
+  ::selection { background: rgb(170 132 85 / 0.45); color: #fff; }
+  :focus-visible { outline: 2px solid var(--color-champagne); outline-offset: 4px; border-radius: 6px; }
+  /* Sections focused by in-page links should not draw a focus ring around the whole block. */
+  [tabindex="-1"]:focus { outline: none; }
+}
+
+/* ---------- Glass ---------- */
+@utility glass {
+  background: linear-gradient(145deg, rgb(255 255 255 / 0.13), rgb(255 255 255 / 0.04) 55%, rgb(255 255 255 / 0.07));
+  border: 1px solid rgb(255 255 255 / 0.15);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.18),
+    inset 0 -1px 0 rgb(255 255 255 / 0.04),
+    0 30px 60px -30px rgb(0 0 0 / 0.55);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  backdrop-filter: blur(22px) saturate(160%);
+}
+/* Darker glass for text-heavy panels sitting on busy photography. */
+@utility glass-deep {
+  background: linear-gradient(145deg, rgb(20 27 43 / 0.62), rgb(9 13 22 / 0.48));
+  border: 1px solid rgb(255 255 255 / 0.13);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.14),
+    0 40px 80px -40px rgb(0 0 0 / 0.7);
+  -webkit-backdrop-filter: blur(28px) saturate(150%);
+  backdrop-filter: blur(28px) saturate(150%);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass, .glass-deep { background: rgb(17 23 37 / 0.94); }
+}
+
+/* ---------- Type helpers ---------- */
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  line-height: 1.6;
+  font-weight: 650;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-bronze-light);
+}
+@utility display-1 {
+  /* Scales with width, but also with height so the hero fits on short laptop screens. */
+  font-size: clamp(2.6rem, min(1.1rem + 5.2vw, 9.4vh + 0.4rem), 5.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+}
+@utility display-2 {
+  font-size: clamp(2.3rem, 1.5rem + 2.6vw, 3.9rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+/* ---------- Buttons ---------- */
+@layer components {
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+    min-height: 50px; padding: 0 1.6rem; border-radius: 999px;
+    font-size: 14px; font-weight: 600; letter-spacing: 0.01em; white-space: nowrap;
+    transition: background-color .25s, color .25s, border-color .25s, box-shadow .25s, translate .25s;
+  }
+  .btn svg { width: 18px; height: 18px; transition: translate .25s var(--ease-expo); }
+  .btn:hover svg { translate: 3px 0; }
+  .btn-outline { border: 1px solid rgb(255 255 255 / 0.7); color: #fff; }
+  .btn-outline:hover { background: #fff; color: var(--color-night); border-color: #fff; }
+  .btn-cream { background: var(--color-cream); color: var(--color-night); }
+  .btn-cream:hover { background: #fff; box-shadow: 0 10px 30px -10px rgb(236 220 191 / 0.55); }
+  .btn-bronze {
+    background: linear-gradient(135deg, #c39a66, var(--color-bronze) 55%, #8f6c43);
+    color: #fff;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.3), 0 14px 30px -12px rgb(170 132 85 / 0.7);
+  }
+  .btn-bronze:hover { background: linear-gradient(135deg, #cfa673, #b48c5c 55%, #96724a); }
+
+  .link-underline {
+    background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat;
+    padding-bottom: 3px;
+    transition: background-size .35s var(--ease-expo);
+  }
+  .link-underline:hover { background-size: 0 1px; background-position: 100% 100%; }
+  .nav-link {
+    position: relative; padding: 8px 0;
+    background: linear-gradient(var(--color-bronze-light), var(--color-bronze-light)) 0 100% / 0 1px no-repeat;
+    transition: background-size .35s var(--ease-expo), color .2s;
+  }
+  .nav-link:hover { background-size: 100% 1px; }
+}
+
+/* ---------- Header ---------- */
+/* Own view-transition layer so the fixed header never cross-fades when collections switch. */
+.site-header { view-transition-name: site-header; }
+::view-transition-group(site-header) { animation: none; }
+.site-header { transition: background-color .4s, border-color .4s, height .4s var(--ease-expo), -webkit-backdrop-filter .4s, backdrop-filter .4s; border-bottom: 1px solid transparent; }
+.site-header[data-scrolled="true"] {
+  background: rgb(9 13 22 / 0.55);
+  border-bottom-color: rgb(255 255 255 / 0.08);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(160%);
+}
+
+/* ---------- Hero ---------- */
+.hero-shade { opacity: 0; }
+.hero-text { text-shadow: 0 2px 30px rgb(0 0 0 / 0.35); }
+
+/* Storeys tabs: underline slides under the active option, like a segmented editorial tab bar. */
+.storey-tab { position: relative; padding: 10px 2px; color: rgb(244 240 232 / 0.62); transition: color .25s; cursor: pointer; }
+.storey-tab::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: #fff; scale: 0 1; transition: scale .45s var(--ease-expo); }
+.storey-tab:hover { color: #fff; }
+.storey-tab:has(input:checked) { color: #fff; }
+.storey-tab:has(input:checked)::after { scale: 1 1; }
+.storey-tab:has(input:focus-visible) { outline: 2px solid var(--color-champagne); outline-offset: 4px; border-radius: 4px; }
+
+/* Bedroom / bathroom chips: square keys, the active one lit. */
+.chip {
+  display: grid; place-items: center; min-width: 38px; height: 38px; padding: 0 10px;
+  border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer;
+  border: 1px solid rgb(255 255 255 / 0.16); background: rgb(255 255 255 / 0.04); color: rgb(244 240 232 / 0.85);
+  transition: background-color .2s, color .2s, border-color .2s;
+}
+.chip:hover { border-color: rgb(255 255 255 / 0.45); color: #fff; }
+.chip:has(input:checked) { background: var(--color-cream); border-color: var(--color-cream); color: var(--color-night); }
+.chip:has(input:focus-visible) { outline: 2px solid var(--color-champagne); outline-offset: 3px; }
+
+/* Dual range slider: two native ranges share one track. */
+.range-pair { position: relative; height: 28px; }
+.range-pair::before {
+  content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 4px; margin-top: -2px; border-radius: 4px;
+  background: linear-gradient(90deg,
+    rgb(255 255 255 / 0.18) calc(10px + (100% - 20px) * var(--low, 0)),
+    var(--color-bronze-light) calc(10px + (100% - 20px) * var(--low, 0)),
+    var(--color-bronze-light) calc(10px + (100% - 20px) * var(--high, 1)),
+    rgb(255 255 255 / 0.18) calc(10px + (100% - 20px) * var(--high, 1)));
+}
+.range-pair input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; background: none; appearance: none; -webkit-appearance: none; pointer-events: none; }
+.range-pair input::-webkit-slider-runnable-track { height: 28px; background: none; }
+.range-pair input::-moz-range-track { background: none; }
+.range-pair input::-webkit-slider-thumb { -webkit-appearance: none; pointer-events: auto; width: 20px; height: 20px; margin-top: 4px; border-radius: 50%; background: var(--color-cream); border: 0; box-shadow: 0 0 0 4px rgb(214 184 143 / 0.35), 0 2px 8px rgb(0 0 0 / 0.4); cursor: grab; }
+.range-pair input::-moz-range-thumb { pointer-events: auto; width: 20px; height: 20px; border-radius: 50%; background: var(--color-cream); border: 0; box-shadow: 0 0 0 4px rgb(214 184 143 / 0.35), 0 2px 8px rgb(0 0 0 / 0.4); cursor: grab; }
+.range-pair input:focus-visible { outline: none; }
+.range-pair input:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 3px var(--color-night), 0 0 0 5px var(--color-champagne); }
+.range-pair input:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 3px var(--color-night), 0 0 0 5px var(--color-champagne); }
+
+/* Scroll cue line */
+.scroll-line { position: relative; overflow: hidden; }
+.scroll-line::after { content: ''; position: absolute; inset: 0; background: linear-gradient(transparent, #fff); translate: 0 -100%; }
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-line::after { animation: scroll-cue 2.4s var(--ease-expo) infinite; }
+}
+@keyframes scroll-cue { 0% { translate: 0 -100%; } 60%, 100% { translate: 0 100%; } }
+
+/* ---------- Collections ---------- */
+.collection-tab { transition: border-color .3s, box-shadow .3s; }
+.collection-tab[aria-selected="true"] {
+  border-color: rgb(214 184 143 / 0.75);
+  box-shadow: 0 0 0 1px rgb(214 184 143 / 0.35), 0 30px 60px -30px rgb(0 0 0 / 0.75);
+}
+.collection-tab[aria-selected="true"] .tab-bar { scale: 1 1; }
+.tab-bar { scale: 0 1; transform-origin: left; transition: scale .5s var(--ease-expo); }
+/* Switching collection: the new photo wipes in over the old one; everything else cross-fades. */
+.collection-photo { view-transition-name: collection-photo; }
+::view-transition-old(collection-photo),
+::view-transition-new(collection-photo) { height: 100%; object-fit: cover; mix-blend-mode: normal; }
+::view-transition-old(collection-photo) { animation: vt-photo-out .7s var(--ease-expo) both; }
+::view-transition-new(collection-photo) { animation: vt-photo-in .8s var(--ease-expo) both; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: .35s; }
+@keyframes vt-photo-out { to { opacity: 0.4; scale: 1.06; } }
+@keyframes vt-photo-in { from { clip-path: inset(0 0 0 100% round 24px); } to { clip-path: inset(0 round 24px); } }
+
+/* ---------- FAQ: animated <details> where supported, instant elsewhere ---------- */
+.faq::details-content { block-size: 0; overflow: clip; opacity: 0; transition: block-size .45s var(--ease-expo), opacity .35s, content-visibility .45s allow-discrete; }
+.faq[open]::details-content { block-size: auto; opacity: 1; }
+.faq summary { list-style: none; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq .faq-icon { transition: rotate .35s var(--ease-expo), background-color .25s; }
+.faq[open] .faq-icon { rotate: 45deg; background: var(--color-cream); color: var(--color-night); }
+
+/* ---------- Map card ---------- */
+.map-card { transition: border-color .25s, translate .35s var(--ease-expo), box-shadow .25s; }
+.map-card:hover { border-color: rgb(214 184 143 / 0.6); translate: 0 -3px; }
+.map-card:hover .map-arrow { translate: 4px 0; }
+.map-arrow { transition: translate .3s var(--ease-expo); }
+
+/* ---------- Motion ---------- */
+/* Hero entrance: waits for the logo intro (html.ready), never hides content without JS-free fallback. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js:not(.ready) .rise { opacity: 0; }
+  html.ready .rise { animation: rise 1.2s var(--ease-expo) both; animation-delay: var(--d, 0s); }
+  html.ready .rise-soft { animation-name: rise-soft; }
+}
+@keyframes rise { from { opacity: 0; translate: 0 30px; filter: blur(8px); } }
+/* Glass panels rise without filter so their backdrop blur stays intact. */
+@keyframes rise-soft { from { opacity: 0; translate: 0 30px; } }
+
+/* Scroll-driven effects: progressive enhancement, decorative only. */
+@supports ((animation-timeline: view()) and (animation-range: entry)) {
+  @media (prefers-reduced-motion: no-preference) {
+    .hero { view-timeline: --hero block; }
+    .hero-photo { animation: hero-zoom linear both; animation-timeline: --hero; animation-range: exit 0% exit 100%; }
+    .hero-shade { animation: hero-shade linear both; animation-timeline: --hero; animation-range: exit 0% exit 85%; }
+
+    .reveal { animation: reveal linear both; animation-timeline: view(); animation-range: entry 0% cover 28%; }
+    .reveal-img { animation: reveal-img linear both; animation-timeline: view(); animation-range: entry 0% cover 45%; }
+    .parallax { animation: parallax linear both; animation-timeline: view(); animation-range: cover 0% cover 100%; }
+  }
+}
+@keyframes hero-zoom { to { scale: 1.12; translate: 0 8%; } }
+@keyframes hero-shade { to { opacity: 1; } }
+@keyframes reveal { from { opacity: 0; translate: 0 48px; } }
+@keyframes reveal-img { from { opacity: 0; scale: 0.94; } }
+@keyframes parallax { from { translate: 0 -6%; } to { translate: 0 6%; } }
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) { animation: none !important; }
+  .faq::details-content { transition: none; }
+}

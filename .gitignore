@@ -1,0 +1,7 @@
+node_modules
+dist
+dist-artifact
+*.log
+.DS_Store
+Thumbs.db
+content_to_use/drone_content/
