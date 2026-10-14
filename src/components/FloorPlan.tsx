@@ -3,6 +3,7 @@ import { contact } from '../data/content'
 import { floorplanSizes } from '../data/floorplans'
 import { formatArea, series, type Design } from '../data/designs'
 import { to } from '../lib/router'
+import { lockScroll } from '../hooks/useSmoothScroll'
 import { ArrowRight, ChevronRight, CloseIcon, DownloadIcon, MinusIcon, PlusIcon } from './Icons'
 
 export type Plan = { label: string; src: string; width: number; height: number }
@@ -43,7 +44,7 @@ function FloorSelect({
           id={id}
           value={value}
           onChange={(e) => onChange(Number(e.target.value))}
-          className="w-full cursor-pointer appearance-none rounded-[12px] border border-ink/15 bg-white py-3 pl-4 pr-10 text-[15px] font-semibold text-ink hover:border-ink/40 focus:border-bronze focus:outline-none"
+          className="w-full cursor-pointer appearance-none rounded-[12px] border border-ink/15 bg-white py-3 pl-4 pr-10 text-[15px] font-semibold text-ink hover:border-ink/40 focus:border-bronze"
         >
           {plans.map((plan, i) => (
             <option key={plan.label} value={i}>
@@ -139,23 +140,31 @@ export function FloorPlanViewer({
     if (!open && dialog.open) dialog.close()
   }, [open])
 
+  // The page behind stays put while the viewer is open.
+  const isOpen = open !== null
+  useEffect(() => {
+    if (!isOpen) return
+    lockScroll(true)
+    return () => lockScroll(false)
+  }, [isOpen])
+
   // Another home or floor starts fitted to the screen again.
   useEffect(() => setZoomed(false), [open?.slug, floor])
 
   return (
     <dialog
       ref={ref}
-      aria-label={current && plan ? `${current.name}, ${plan.label.toLowerCase()}` : 'Floor plan'}
+      aria-label={current ? `${current.name}, ${plan ? plan.label.toLowerCase() : 'floor plan'}` : 'Floor plan'}
       onClose={() => onChange(null)}
       // A click on the backdrop (outside the panel) closes it.
       onClick={(e) => e.target === e.currentTarget && ref.current?.close()}
       className="glass-strong m-auto h-[min(920px,calc(100svh-24px))] w-[min(1240px,calc(100vw-24px))] max-h-none max-w-none overflow-hidden rounded-[28px] p-0 text-ink backdrop:bg-ink/35 backdrop:backdrop-blur-[3px]"
     >
-      {current && plan && (
+      {current && (
         <div className="flex h-full flex-col p-3 sm:p-4">
           <div className="flex flex-wrap items-end gap-2 pb-3">
             {homes.length > 1 ? (
-              <div role="group" aria-label="Choose a home" className="flex min-w-0 flex-1 gap-1.5 overflow-x-auto pb-0.5">
+              <div role="group" aria-label="Choose a home" className="flex min-w-0 flex-1 gap-1.5 overflow-x-auto pb-0.5 max-sm:basis-full">
                 {homes.map((home) => (
                   <button
                     key={home.slug}
@@ -176,15 +185,17 @@ export function FloorPlanViewer({
                 <FloorSelect plans={plans} value={floor} onChange={(f) => onChange({ slug: current.slug, floor: f })} label="Floor" />
               </div>
             )}
-            <button
-              type="button"
-              onClick={() => setZoomed((z) => !z)}
-              aria-pressed={zoomed}
-              className="btn btn-outline shrink-0 cursor-pointer !min-h-[46px] !px-3 !text-[13px] sm:!px-4"
-            >
-              {zoomed ? <MinusIcon className="!size-4" /> : <PlusIcon className="!size-4" />}
-              <span className="max-sm:sr-only">{zoomed ? 'Fit to screen' : 'Zoom in'}</span>
-            </button>
+            {plan && (
+              <button
+                type="button"
+                onClick={() => setZoomed((z) => !z)}
+                aria-pressed={zoomed}
+                className="btn btn-outline shrink-0 cursor-pointer !min-h-[46px] !px-3 !text-[13px] sm:!px-4"
+              >
+                {zoomed ? <MinusIcon className="!size-4" /> : <PlusIcon className="!size-4" />}
+                <span className="max-sm:sr-only">{zoomed ? 'Fit to screen' : 'Zoom in'}</span>
+              </button>
+            )}
             <button
               type="button"
               onClick={() => ref.current?.close()}
@@ -199,14 +210,28 @@ export function FloorPlanViewer({
             data-lenis-prevent
             className={`relative min-h-0 flex-1 rounded-[18px] border border-ink/10 bg-white ${zoomed ? 'overflow-auto' : 'overflow-hidden'}`}
           >
-            <img
-              key={plan.src}
-              src={plan.src}
-              alt={`${current.name}, ${plan.label.toLowerCase()}`}
-              width={plan.width}
-              height={plan.height}
-              className={zoomed ? 'block h-auto w-[1800px] max-w-none' : 'absolute inset-0 size-full object-contain p-3 sm:p-6'}
-            />
+            {plan ? (
+              <img
+                key={plan.src}
+                src={plan.src}
+                alt={`${current.name}, ${plan.label.toLowerCase()}`}
+                width={plan.width}
+                height={plan.height}
+                // Zoomed: at most twice the image's own width, so narrow plans stay sharp enough to read.
+                style={zoomed ? { width: Math.min(plan.width * 2, 1800) } : undefined}
+                className={zoomed ? 'block h-auto max-w-none' : 'absolute inset-0 size-full object-contain p-3 sm:p-6'}
+              />
+            ) : (
+              <div className="flex h-full flex-col items-center justify-center gap-3 px-5 text-center">
+                <p className="text-[14px] font-medium text-ink-soft">The {current.name} floor plan isn’t online yet.</p>
+                <a
+                  href={`mailto:${contact.email}?subject=${encodeURIComponent(`Floor plan: ${current.name}`)}`}
+                  className="link-underline text-[14px] font-semibold text-ink"
+                >
+                  Ask us for it
+                </a>
+              </div>
+            )}
           </div>
 
           <div className="flex flex-wrap items-center justify-between gap-x-5 gap-y-2 pt-3 text-[13px]">
@@ -218,10 +243,13 @@ export function FloorPlanViewer({
                 <DownloadIcon className="size-4 text-bronze-deep" />
                 <span className="link-underline">Download PDF</span>
               </a>
-              <a href={to(`/designs/${current.slug}`)} onClick={() => ref.current?.close()} className="inline-flex items-center gap-1.5">
-                <span className="link-underline">View home</span>
-                <ArrowRight className="size-4" />
-              </a>
+              {/* On a home's own page this would only lead back to it. */}
+              {homes.length > 1 && (
+                <a href={to(`/designs/${current.slug}`)} onClick={() => ref.current?.close()} className="inline-flex items-center gap-1.5">
+                  <span className="link-underline">View home</span>
+                  <ArrowRight className="size-4" />
+                </a>
+              )}
             </div>
           </div>
         </div>

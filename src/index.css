@@ -31,6 +31,8 @@
   html {
     background: var(--color-paper);
     scroll-padding-top: 96px;
+    /* Keeps the layout still when a modal hides the scrollbar. */
+    scrollbar-gutter: stable;
   }
   @media (prefers-reduced-motion: no-preference) {
     html { scroll-behavior: smooth; }

@@ -54,6 +54,13 @@ export function useSmoothScroll() {
   }, [])
 }
 
+/** Freezes the page behind a modal so wheel and touch scrolling stay inside it. */
+export function lockScroll(locked: boolean) {
+  if (locked) lenis?.stop()
+  else lenis?.start()
+  document.documentElement.style.overflow = locked ? 'hidden' : ''
+}
+
 /** Jumps (no animation) to a scroll position, after the new page has rendered. */
 export function jumpTo(y: number) {
   if (lenis) {
