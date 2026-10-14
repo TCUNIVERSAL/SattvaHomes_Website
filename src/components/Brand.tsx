@@ -1,11 +1,10 @@
-import mark from '../assets/brand/logo-mark.webp'
-import word from '../assets/brand/logo-word.webp'
+import logo from '../assets/brand/sattva-logo.svg'
 
-export function Brand({ className = '' }: { className?: string }) {
+/** The Sattva Homes logo, linking home. Size it with `logoClassName` (a width; height follows). */
+export function Brand({ className = '', logoClassName = 'w-[140px]' }: { className?: string; logoClassName?: string }) {
   return (
-    <a href="#" aria-label="Sattva Homes home" className={`flex shrink-0 items-center gap-2.5 ${className}`}>
-      <img src={mark} alt="" width={160} height={159} className="h-auto w-10 sm:w-11" />
-      <img src={word} alt="" width={480} height={133} className="h-auto w-[104px] sm:w-[118px]" />
+    <a href="#" aria-label="Sattva Homes home" className={`flex shrink-0 items-center ${className}`}>
+      <img src={logo} alt="" width={541} height={350} className={`h-auto ${logoClassName}`} />
     </a>
   )
 }

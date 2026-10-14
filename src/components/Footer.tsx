@@ -12,7 +12,7 @@ export function Footer() {
     <footer className="border-t border-ink/8 bg-mist px-5 pb-28 pt-14 sm:px-8 sm:pb-10 lg:px-12">
       <div className="mx-auto max-w-[1340px]">
         <div className="flex flex-col gap-8 pb-10 md:flex-row md:items-center md:justify-between">
-          <Brand className="w-max" />
+          <Brand className="w-max" logoClassName="w-[210px]" />
           <p className="font-serif text-[21px] leading-snug text-ink">
             Clarity before commitment.
             <br />

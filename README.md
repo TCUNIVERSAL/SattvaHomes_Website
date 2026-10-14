@@ -30,10 +30,11 @@ npm run preview   # serves dist/ locally
 | `src/lib/router.ts` | Hash routes: `#/designs` (filters in the query string), `#/designs/<slug>`, `#/compare?homes=a,b,c`; anything else is the landing page |
 | `src/lib/filters.ts`, `src/lib/compare.ts` | Shared filter logic (hero finder + catalogue) and the compare list (up to 3 homes, kept in localStorage) |
 | `scripts/make-floorplans.py` | Downloads each design's brochure PDF (into `content_to_use/brochures/`) and renders its sheet to `public/floorplans/<slug>.webp`; also writes `src/data/floorplans.ts` (image sizes). Needs `pip install pypdfium2 pillow`; re-runnable |
+| `scripts/make-logo.py` | Traces `content_to_use/logo/sattva-homes-logo.png` into vector pieces: writes `src/assets/brand/sattva-logo.svg` (header, footer) and the animated intro logo in `index.html` (between the `logo:start`/`logo:end` markers). Needs `pip install potracer opencv-python-headless pillow`; re-runnable |
 | `src/pages/` | `HomePage` (landing sections), `DesignsPage` (catalogue), `DesignPage` (one home), `ComparePage`, `NotFound` |
 | `src/components/` | One file per section: `Header`, `Hero` (+ `HomeFinder`), `PromiseBar`, `Collections`, `AerialFilm` (Why Sattva video), `FamilyMoments`, `Journey`, `Questions`, `Contact`, `Footer` |
 | `src/index.css` | Tokens, glass utilities, finder controls, motion |
-| `index.html` | SEO meta, JSON-LD business data, and the once-per-visit logo intro |
+| `index.html` | SEO meta, JSON-LD business data, and the once-per-visit logo intro (the logo builds piece by piece, then fades; Skip button, and any click, key, scroll or touch skips it) |
 | `public/images/hero-day.webp` | Hero photograph (preloaded for fast first paint) |
 | `public/video/aerial-1080.mp4`, `aerial-720.mp4` | Why Sattva drone loop (desktop / mobile), cut from `content_to_use/drone_content`. Kept out of `src` so the inlined artifact build stays small |
 | `original-artifact/` | Untouched copy of the previous site, for reference |

@@ -43,10 +43,12 @@ export function Header({ page }: { page: Route['page'] }) {
       >
         <div
           className={`mx-auto flex max-w-[1440px] items-center justify-between gap-6 px-5 transition-[height] duration-500 sm:px-8 lg:px-12 ${
-            scrolled ? 'h-[72px]' : 'h-[88px]'
+            scrolled ? 'h-[72px]' : 'h-[92px] min-[961px]:h-[108px]'
           }`}
         >
-          <Brand />
+          <Brand
+            logoClassName={`transition-[width] duration-500 ${scrolled ? 'w-[96px]' : 'w-[112px] min-[961px]:w-[140px]'}`}
+          />
 
           <nav aria-label="Main navigation" className="ml-auto hidden items-center gap-9 text-[14px] font-medium text-ink md:flex">
             {navLinks.map((link) => (
@@ -98,7 +100,9 @@ export function Header({ page }: { page: Route['page'] }) {
         id="mobile-menu"
         aria-label="Mobile navigation"
         hidden={!open}
-        className="glass-strong fixed inset-x-4 top-[calc(84px+env(safe-area-inset-top))] z-40 flex flex-col gap-1 rounded-3xl p-3 md:hidden"
+        className={`glass-strong fixed inset-x-4 z-40 flex flex-col gap-1 rounded-3xl p-3 md:hidden ${
+          scrolled ? 'top-[calc(84px+env(safe-area-inset-top))]' : 'top-[calc(100px+env(safe-area-inset-top))]'
+        }`}
       >
         {[...navLinks, { href: '#contact', label: 'Let’s talk' }].map((link) => (
           <a
