@@ -5,7 +5,7 @@ import { Collections } from '../components/Collections'
 import { Stats } from '../components/Stats'
 import { AerialFilm } from '../components/AerialFilm'
 import { FamilyMoments } from '../components/FamilyMoments'
-import { Journey } from '../components/Journey'
+import { HouseModel } from '../components/HouseModel'
 import { Questions } from '../components/Questions'
 import { Contact } from '../components/Contact'
 
@@ -22,7 +22,7 @@ export function HomePage() {
       <Stats />
       <AerialFilm />
       <FamilyMoments />
-      <Journey />
+      <HouseModel />
       <Questions />
       <Contact />
     </>

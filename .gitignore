@@ -5,3 +5,14 @@ dist-artifact
 .DS_Store
 Thumbs.db
 content_to_use/drone_content/
+
+# Vercel
+.vercel
+
+# Local media, backups & archives
+*.zip
+*.mp4
+!public/video/*.mp4
+_backup-dark-version/
+example_video/
+

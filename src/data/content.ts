@@ -14,7 +14,7 @@ export const contact = {
 export const navLinks = [
   { href: '#/designs', label: 'Home designs' },
   { href: '#difference', label: 'Why Sattva' },
-  { href: '#journey', label: 'How it works' },
+  { href: '#house-model', label: '3D House model' },
 ]
 
 // Track-record counters, as shown on the sattva.com.au home page.
@@ -91,12 +91,6 @@ export const collections: Collection[] = [
     specs: [['12.35 m', 'Width'], ['15.11 m', 'Length']],
     area: '307.97 m²',
   },
-]
-
-export const steps = [
-  { lead: 'It starts with', accent: 'listening.', text: 'Tell us about your life, your land and your budget.', label: 'YOUR VISION' },
-  { lead: 'Make the details', accent: 'clear.', text: 'Choose your design and inclusions. Ask anything.', label: 'YOUR PLAN' },
-  { lead: 'Bring it to life,', accent: 'together.', text: 'You stay in the loop, right up to the keys.', label: 'YOUR HOME' },
 ]
 
 export const faqs = [
