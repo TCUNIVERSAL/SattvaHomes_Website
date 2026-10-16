@@ -3,11 +3,16 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "node scripts/check-media.mjs && tsc && vite build",
+    "build:artifact": "npm run build -- --config vite.artifact.config.ts && node scripts/make-artifact.mjs",
     "preview": "vite preview",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "check:media": "node scripts/check-media.mjs"
   },
   "dependencies": {
     "@fontsource-variable/manrope": "^5.3.0",

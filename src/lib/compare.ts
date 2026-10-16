@@ -81,9 +81,6 @@ export const compare = {
     const next = clean(slugs)
     if (next.join() !== list.join()) write(next)
   },
-  clear() {
-    write([])
-  },
 }
 
 export const useCompareList = () => useSyncExternalStore(subscribe, () => list)

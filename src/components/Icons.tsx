@@ -100,12 +100,6 @@ export const SofaIcon = (p: SVGProps<SVGSVGElement>) => (
   </svg>
 )
 
-export const StoreyIcon = (p: SVGProps<SVGSVGElement>) => (
-  <svg {...base} {...p}>
-    <path d="M3.5 11 12 4l8.5 7M5.5 9.5V20h13V9.5M10 20v-5h4v5" />
-  </svg>
-)
-
 export const RulerIcon = (p: SVGProps<SVGSVGElement>) => (
   <svg {...base} {...p}>
     <path d="M3 8h18v8H3zM7 8v3M11 8v4M15 8v3M19 8v4" />
@@ -154,11 +148,5 @@ export const SlidersIcon = (p: SVGProps<SVGSVGElement>) => (
 export const ChevronRight = (p: SVGProps<SVGSVGElement>) => (
   <svg {...base} {...p}>
     <path d="m9 6 6 6-6 6" />
-  </svg>
-)
-
-export const ArrowLeft = (p: SVGProps<SVGSVGElement>) => (
-  <svg {...base} {...p}>
-    <path d="M19 12H5M11 6l-6 6 6 6" />
   </svg>
 )

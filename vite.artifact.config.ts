@@ -5,6 +5,9 @@ import tailwindcss from '@tailwindcss/vite'
 // Builds the site with every image and font inlined, so it can be packed into one shareable HTML file.
 export default defineConfig({
   base: './',
+  define: {
+    'import.meta.env.VITE_MEDIA_VERSION': JSON.stringify(Date.now().toString(36)),
+  },
   plugins: [react(), tailwindcss()],
   build: {
     outDir: 'dist-artifact',

@@ -40,7 +40,7 @@ export const finder = {
 
 export type CollectionKey = 'essence' | 'horizon' | 'meadowline'
 
-export type Collection = {
+type Collection = {
   key: CollectionKey
   /** The example home's page in the catalogue */
   slug: string

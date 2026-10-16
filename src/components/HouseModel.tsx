@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import modelPoster from '../assets/images/house-model-poster.webp'
 import { ArrowUpRight, PauseIcon, PlayIcon } from './Icons'
 
-const modelVideo = `${import.meta.env.BASE_URL}video/final3dvideo.mp4`
+const modelVideo = `${import.meta.env.BASE_URL}video/final3dvideo.mp4?v=${import.meta.env.VITE_MEDIA_VERSION}`
 
 export function HouseModel() {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -98,7 +98,11 @@ export function HouseModel() {
                 id="house-model-video"
                 aria-label="Preview of the Sattva Homes 3D house model"
                 aria-describedby="house-model-video-caption"
-                onPlay={() => setPlaying(true)}
+                onLoadedData={() => setVideoError(false)}
+                onPlay={() => {
+                  setPlaying(true)
+                  setVideoError(false)
+                }}
                 onPause={() => setPlaying(false)}
                 onError={() => setVideoError(true)}
                 className="block size-full object-cover object-center"

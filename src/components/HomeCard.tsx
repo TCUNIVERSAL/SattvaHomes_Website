@@ -4,7 +4,7 @@ import { to } from '../lib/router'
 import { ArrowRight, BathIcon, BedIcon, CarIcon, CheckIcon, PlusIcon, SofaIcon } from './Icons'
 
 /** Bedrooms, bathrooms, car spaces and living areas as a compact icon row. */
-export function Specs({ design, className = '' }: { design: Design; className?: string }) {
+function Specs({ design, className = '' }: { design: Design; className?: string }) {
   const items = [
     { icon: BedIcon, value: design.bedrooms, label: 'bedrooms' },
     { icon: BathIcon, value: design.bathrooms, label: 'bathrooms' },

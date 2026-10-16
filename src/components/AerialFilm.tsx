@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import poster from '../assets/images/aerial-poster.webp'
 import { PauseIcon, PlayIcon } from './Icons'
 
-// The film lives in public/video (not imported), so the inlined artifact build stays small; there the poster stands in.
-const filmSrc = `${import.meta.env.BASE_URL}video/useme.mp4`
+// Keep video separate from the JavaScript bundle; the shareable artifact includes the video folder.
+const filmSrc = `${import.meta.env.BASE_URL}video/useme.mp4?v=${import.meta.env.VITE_MEDIA_VERSION}`
 
 export function AerialFilm() {
   const videoRef = useRef<HTMLVideoElement>(null)

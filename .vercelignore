@@ -1,0 +1,9 @@
+node_modules/
+dist/
+dist-artifact/
+content_to_use/
+.claude/
+.agents/
+.codex/
+*.zip
+SatvaHomes_showcase.mp4

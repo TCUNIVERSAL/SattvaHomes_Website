@@ -93,7 +93,7 @@ export function filterParams(f: Filters) {
   }
 }
 
-export function matches(d: Design, f: Filters) {
+function matches(d: Design, f: Filters) {
   return (
     (!f.series || d.series === f.series) &&
     (!f.storeys || String(d.storeys) === f.storeys) &&

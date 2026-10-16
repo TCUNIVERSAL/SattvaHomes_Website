@@ -244,13 +244,6 @@
 @keyframes vt-photo-out { to { opacity: 0.4; scale: 1.06; } }
 @keyframes vt-photo-in { from { clip-path: inset(0 0 0 100% round 24px); } to { clip-path: inset(0 round 24px); } }
 
-/* ---------- Family moments ---------- */
-/* Fades the photo's outer edge into the matching sand panel, so no rectangle shows. */
-.feather-edges {
-  mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent), linear-gradient(transparent, #000 3%, #000 97%, transparent);
-  mask-composite: intersect;
-}
-
 /* ---------- FAQ: animated <details> where supported, instant elsewhere ---------- */
 .faq::details-content { block-size: 0; overflow: clip; opacity: 0; transition: block-size .45s var(--ease-expo), opacity .35s, content-visibility .45s allow-discrete; }
 .faq[open]::details-content { block-size: auto; opacity: 1; }

@@ -62,9 +62,5 @@ export function replaceHash(hash: string) {
   window.dispatchEvent(new HashChangeEvent('hashchange'))
 }
 
-export const navigate = (hash: string) => {
-  location.hash = hash
-}
-
 /** The last catalogue view (with its filters), so "back to home designs" returns to the same results. */
 export const lastList = { hash: '#/designs' }

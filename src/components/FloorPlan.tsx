@@ -6,10 +6,10 @@ import { to } from '../lib/router'
 import { lockScroll } from '../hooks/useSmoothScroll'
 import { ArrowRight, ChevronRight, CloseIcon, DownloadIcon, MinusIcon, PlusIcon } from './Icons'
 
-export type Plan = { label: string; src: string; width: number; height: number }
+type Plan = { label: string; src: string; width: number; height: number }
 
 /** A design's floor plans, ground floor first. Empty when the brochure has none. */
-export function floorPlans(design: Design): Plan[] {
+function floorPlans(design: Design): Plan[] {
   const sizes = floorplanSizes[design.slug] ?? []
   const labels =
     design.storeys === 1 ? ['Floor plan'] : sizes.length === 2 ? ['Ground floor', 'First floor'] : ['Both floors']
