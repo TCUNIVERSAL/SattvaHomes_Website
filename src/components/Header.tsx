@@ -50,7 +50,7 @@ export function Header({ page }: { page: Route['page'] }) {
             logoClassName={`transition-[width] duration-500 ${scrolled ? 'w-[96px]' : 'w-[112px] min-[961px]:w-[140px]'}`}
           />
 
-          <nav aria-label="Main navigation" className="ml-auto hidden items-center gap-9 text-[14px] font-medium text-ink md:flex">
+          <nav aria-label="Main navigation" className="ml-auto hidden items-center gap-5 min-[1100px]:gap-9 text-[14px] font-medium text-ink md:flex">
             {navLinks.map((link) => (
               <a
                 key={link.href}

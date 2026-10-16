@@ -2,7 +2,7 @@ import { steps } from '../data/content'
 
 export function Journey() {
   return (
-    <section id="journey" aria-labelledby="journey-title" className="relative overflow-clip px-5 py-20 sm:px-8 md:py-28 lg:px-12">
+    <section id="journey" aria-labelledby="journey-title" className="relative overflow-clip px-4 py-16 sm:px-6 md:py-24 lg:px-12">
       {/* Ambient light for the glass to catch */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         <div className="absolute left-[8%] top-[30%] size-[460px] rounded-full bg-[radial-gradient(circle,rgb(236_220_194/.9),transparent_65%)]" />

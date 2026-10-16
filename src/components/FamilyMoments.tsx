@@ -26,7 +26,7 @@ const moments = [
 
 export function FamilyMoments() {
   return (
-    <section aria-labelledby="family-title" className="relative px-5 pb-20 sm:px-8 md:pb-28 lg:px-12">
+    <section aria-labelledby="family-title" className="relative px-4 pb-16 sm:px-6 md:pb-24 lg:px-12">
       {/* Panel colour is the board the photos are pinned to */}
       <div className="reveal mx-auto grid max-w-[1340px] items-center overflow-clip rounded-[36px] bg-[#efdcc7] shadow-[0_40px_80px_-50px_rgb(31_43_66/.3)] lg:grid-cols-[1.15fr_1fr]">
         {/* Container units keep the captions in proportion with the polaroids at any width */}

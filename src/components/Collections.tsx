@@ -36,7 +36,7 @@ export function Collections() {
   }
 
   return (
-    <section id="collections" aria-labelledby="collections-title" className="relative px-5 py-20 sm:px-8 md:py-28 lg:px-12">
+    <section id="collections" aria-labelledby="collections-title" className="relative px-4 py-16 sm:px-6 md:py-24 lg:px-12">
       <div className="mx-auto max-w-[1340px]">
         <div className="reveal flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
@@ -134,17 +134,17 @@ export function Collections() {
 
             <div className="glass-strong flex flex-col justify-center rounded-[24px] p-6 sm:p-8 lg:p-10">
               <p className="eyebrow">Example home</p>
-              <h3 className="mt-3 text-[40px] leading-[1.05] tracking-[-.02em] sm:text-[46px]">
+              <h3 className="mt-3 text-[clamp(28px,6vw,44px)] leading-[1.05] tracking-[-.02em] sm:text-[46px]">
                 Meet <em>{current.name}.</em>
               </h3>
-              <p className="mt-4 text-[16px] leading-relaxed text-ink-soft">{current.description}</p>
+              <p className="mt-4 text-[15px] sm:text-[16px] leading-relaxed text-ink-soft">{current.description}</p>
 
               <dl className={`mt-7 grid gap-2 ${current.specs.length === 3 ? 'grid-cols-3' : 'grid-cols-2'}`}>
                 {current.specs.map(([value, label]) => (
-                  <div key={label} className="rounded-2xl border border-white bg-white/70 px-4 py-3.5">
+                  <div key={label} className="rounded-2xl border border-white bg-white/70 px-2.5 sm:px-4 py-3 sm:py-3.5 text-center sm:text-left">
                     <dt className="sr-only">{label}</dt>
-                    <dd className="font-serif text-[26px] leading-none text-ink">{value}</dd>
-                    <dd className="mt-1.5 text-[12px] font-medium text-ink-soft" aria-hidden="true">
+                    <dd className="font-serif text-[22px] sm:text-[26px] leading-none text-ink">{value}</dd>
+                    <dd className="mt-1.5 text-[11px] sm:text-[12px] font-medium text-ink-soft" aria-hidden="true">
                       {label}
                     </dd>
                   </div>

@@ -60,13 +60,10 @@
       .sl-new.logo-animate [class*="sl-letter-"] { animation-name: logo-letter; animation-duration: .42s }
 
       /* Shown by class, not the hidden attribute: Tailwind's base styles force [hidden] to display: none !important. */
-      .logo-intro { position: fixed; inset: 0; z-index: 1000; background: #FBF8F2; display: none; place-content: center; justify-items: center; padding: 24px; transition: opacity .45s ease; cursor: pointer }
+      .logo-intro { position: fixed; inset: 0; z-index: 1000; background: #FBF8F2; display: none; place-content: center; justify-items: center; padding: 24px; transition: opacity .45s ease; cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent }
       html.logo-intro-first { overflow: hidden }
       html.logo-intro-first .logo-intro { display: grid }
       .logo-intro .sattva-logo.sl-new { width: min(440px, 80vw) }
-      .logo-intro-skip { position: absolute; bottom: max(28px, env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); min-height: 44px; padding: 10px 20px; border: 1px solid #D9D1C3; border-radius: 4px; background: transparent; font: 500 14px "Manrope Variable", ui-sans-serif, system-ui, sans-serif; color: #595247; cursor: pointer }
-      .logo-intro-skip:hover { color: #231F1C; border-color: #231F1C }
-      .logo-intro-skip:focus-visible { outline: 3px solid #C69221; outline-offset: 4px }
       .logo-intro.is-leaving { opacity: 0; pointer-events: none }
 
       @keyframes logo-grow { from { transform: scaleY(0) } }
@@ -109,16 +106,15 @@
 <g class="sl-piece sl-homes-4" style="--delay:2.448s"><path fill="#C69221" d="M415.1 515.1c-5.7-.1-10.5-.2-10.7-.3c-.1-.1-.2-7-.2-15.3c0-12.1 .1-15.1 .4-15.3c.5-.3 21.5-.3 21.9 .1c.4 .4 .4 4.1-.1 4.4c-.1 .1-3.9 .2-8.4 .3l-8.1 .1l0 3.9l0 3.9l7.1 .1c6.6 .1 7.1 .2 7.4 .6c.5 .7 .5 2.9 0 3.6c-.4 .5-.5 .6-7.3 .6c-5.5 0-6.8 0-7.1 .3c-.2 .2-.2 1.5-.2 4.1l.1 3.7l8.3 0c5.7 .1 8.5 .2 8.7 .4c.2 .2 .3 .9 .3 2.4c0 2 0 2.1-.6 2.3c-.3 .1-.7 .2-.8 .2c-.1 0-4.9-.1-10.7-.1z"/></g>
 <g class="sl-piece sl-homes-5" style="--delay:2.484s"><path fill="#C69221" d="M462.4 515.2c-1.9-.1-5.6-1.3-7.3-2.2c-1.7-.8-1.8-1.4-.8-3.4c.9-1.7 1.3-2 2.3-1.3c.3 .2 .9 .5 1.4 .7c.5 .1 1.8 .6 3 1c1.8 .6 2.5 .7 4.5 .7c1.8 0 2.6-.1 3.4-.5c.5-.2 1.1-.4 1.2-.4c.9-.1 2.5-2.5 2.3-3.4c-.2-.7-1.2-2-2.2-2.7c-.7-.5-3.1-1.2-5.1-1.6c-3-.5-7.1-2.2-9-3.6c-1.1-1-2.1-3.6-2.1-5.6c0-1.7 1-4.5 1.9-5.5c.8-.8 2.1-1.7 4.2-2.8l1.5-.7l4.9 0c4.2 0 5 0 5.6 .4c.3 .3 .8 .5 .9 .5c.2 0 .9 .3 1.7 .6c1.6 .9 1.8 1.5 1.1 3c-.3 .5-.6 1.2-.7 1.4c-.2 .8-.9 .8-2.2 .2c-2.4-1.2-3.9-1.6-6.7-1.6c-2.7 .1-3.8 .4-5.3 1.5c-1.5 1.2-1.6 3.9-.2 5c1.4 1.2 4.3 2.1 8.6 2.9c3.3 .6 6.8 2.8 8.1 5.3c.2 .4 .5 1.5 .5 2.5c.1 1.5 .1 2.1-.4 3.3c-1 2.7-2.6 4.1-6.4 5.7c-1.7 .8-5.1 1-8.7 .6z"/></g>
 </svg><!-- logo:end -->
-      <button type="button" class="logo-intro-skip">Skip intro</button>
     </div>
     <script>
-      // Fades out once the logo is built. Any click, key, scroll or touch skips ahead; the intro is
+      // Fades out once the logo is built. Any tap, click, key, scroll or touch skips ahead; the intro is
       // hidden again once faded, so it never blocks the page.
       ;(function () {
         var root = document.documentElement
         if (!root.classList.contains('logo-intro-first')) return
         var intro = document.querySelector('.logo-intro')
-        var events = ['click', 'keydown', 'wheel', 'touchstart']
+        var events = ['pointerdown', 'touchstart', 'click', 'keydown', 'wheel']
         var done = false
         var finish = function () {
           if (done) return
@@ -127,12 +123,20 @@
           root.classList.add('ready')
         }
         var leave = function () {
-          events.forEach(function (type) { document.removeEventListener(type, leave) })
-          intro.classList.add('is-leaving')
-          intro.addEventListener('transitionend', finish, { once: true })
-          setTimeout(finish, 600)
+          events.forEach(function (type) {
+            document.removeEventListener(type, leave)
+            window.removeEventListener(type, leave)
+          })
+          if (intro) {
+            intro.classList.add('is-leaving')
+            intro.addEventListener('transitionend', finish, { once: true })
+          }
+          setTimeout(finish, 450)
         }
-        events.forEach(function (type) { document.addEventListener(type, leave, { passive: true }) })
+        events.forEach(function (type) {
+          document.addEventListener(type, leave, { passive: true })
+          window.addEventListener(type, leave, { passive: true })
+        })
         setTimeout(leave, 3150)
       })()
     </script>

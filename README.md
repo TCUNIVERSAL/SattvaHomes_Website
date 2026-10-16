@@ -34,9 +34,9 @@ npm run preview   # serves dist/ locally
 | `src/pages/` | `HomePage` (landing sections), `DesignsPage` (catalogue), `DesignPage` (one home), `ComparePage`, `NotFound` |
 | `src/components/` | One file per section: `Header`, `Hero` (+ `HomeFinder`), `PromiseBar`, `Collections`, `AerialFilm` (Why Sattva video), `FamilyMoments`, `Journey`, `Questions`, `Contact`, `Footer` |
 | `src/index.css` | Tokens, glass utilities, finder controls, motion |
-| `index.html` | SEO meta, JSON-LD business data, and the once-per-visit logo intro (the logo builds piece by piece, then fades; Skip button, and any click, key, scroll or touch skips it) |
+| `index.html` | SEO meta, JSON-LD business data, and the once-per-visit logo intro (the logo builds piece by piece, then fades; any tap, click, key, scroll or touch skips it) |
 | `public/images/hero-day.webp` | Hero photograph (preloaded for fast first paint) |
-| `public/video/aerial-1080.mp4`, `aerial-720.mp4` | Why Sattva drone loop (desktop / mobile), cut from `content_to_use/drone_content`. Kept out of `src` so the inlined artifact build stays small |
+| `public/video/1015.mp4` | Why Sattva video footage. Kept out of `src` so the inlined artifact build stays small |
 | `original-artifact/` | Untouched copy of the previous site, for reference |
 | `_backup-dark-version/` | Snapshot of the earlier dark design (`src`, `public`, `index.html`); safe to delete |
 
