@@ -14,6 +14,10 @@ export function HouseModel() {
     const video = videoRef.current
     if (!video) return
 
+    // Explicitly guarantee muted state for modern browser autoplay policies
+    video.muted = true
+    video.defaultMuted = true
+
     wantsPlay.current = !window.matchMedia('(prefers-reduced-motion: reduce)').matches
     // Load and play the film when it is visible; preserve a visitor's choice to pause.
     const observer = new IntersectionObserver(
@@ -84,7 +88,8 @@ export function HouseModel() {
                 poster={modelPoster}
                 width={2286}
                 height={1080}
-                preload="none"
+                autoPlay
+                preload="metadata"
                 muted
                 loop
                 playsInline

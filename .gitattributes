@@ -1,2 +1,0 @@
-public/video/useme.mp4 filter=lfs diff=lfs merge=lfs -text
-public/video/final3dvideo.mp4 filter=lfs diff=lfs merge=lfs -text

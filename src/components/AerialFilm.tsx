@@ -15,6 +15,8 @@ export function AerialFilm() {
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
+    video.muted = true
+    video.defaultMuted = true
     wantsPlay.current = !window.matchMedia('(prefers-reduced-motion: reduce)').matches
     // Fetch the poster and footage only as the film nears the screen, and pause it once it scrolls away.
     const observer = new IntersectionObserver(
@@ -61,7 +63,8 @@ export function AerialFilm() {
               poster={near ? poster : undefined}
               width={1920}
               height={1080}
-              preload="none"
+              autoPlay
+              preload="metadata"
               muted
               loop
               playsInline
