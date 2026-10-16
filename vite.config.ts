@@ -6,5 +6,5 @@ export default defineConfig({
   // Relative base so the built site works from any folder or sub-path.
   base: './',
   plugins: [react(), tailwindcss()],
-  server: { port: 5173, strictPort: true },
+  server: { host: true, port: 5173, strictPort: true },
 })

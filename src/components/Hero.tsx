@@ -9,11 +9,11 @@ export function Hero() {
         <img
           src={heroSrc}
           alt=""
-          width={1672}
-          height={941}
+          width={1024}
+          height={894}
           fetchPriority="high"
           decoding="async"
-          className="hero-photo size-full object-cover object-[62%_center] md:object-center"
+          className="hero-photo size-full object-cover object-[center_65%] md:object-center"
         />
         {/* Morning mist across the sky so navy type reads clearly */}
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(245_247_250/.9)_0%,rgb(245_247_250/.62)_20%,rgb(245_247_250/.18)_42%,transparent_58%)]" />

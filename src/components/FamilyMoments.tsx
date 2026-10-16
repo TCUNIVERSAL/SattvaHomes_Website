@@ -11,13 +11,13 @@ const moments = [
     place: 'self-start -rotate-3 sm:left-[3%] sm:top-[2%] sm:-rotate-[4deg]',
   },
   {
-    caption: 'Grow',
+    caption: 'We',
     src: grow,
     alt: 'A father marking his young son’s height on a door frame while the mother looks on, smiling.',
     place: 'self-end mt-4 rotate-2 sm:left-[32.5%] sm:top-[24%] sm:mt-0 sm:rotate-[3deg]',
   },
   {
-    caption: 'Home',
+    caption: 'Grow',
     src: home,
     alt: 'A family eating pizza on the floor of their new living room among moving boxes, the house keys on a bench, as the sun sets outside.',
     place: 'self-start mt-4 -rotate-2 sm:left-[62%] sm:top-[46%] sm:mt-0 sm:-rotate-[3deg]',
@@ -86,7 +86,7 @@ export function FamilyMoments() {
             </figcaption>
           </figure>
           <p className="mt-7 max-w-[420px] text-[17px] leading-relaxed text-ink-soft">
-            Room to be together. Space to grow. A place that feels like yours from the very first night.
+            Together we grow. Space to make your own, and a place that feels like yours from the very first night.
           </p>
         </div>
       </div>

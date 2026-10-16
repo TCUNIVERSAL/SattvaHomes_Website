@@ -36,7 +36,7 @@ npm run preview   # serves dist/ locally
 | `src/index.css` | Tokens, glass utilities, finder controls, motion |
 | `index.html` | SEO meta, JSON-LD business data, and the once-per-visit logo intro (the logo builds piece by piece, then fades; any tap, click, key, scroll or touch skips it) |
 | `public/images/hero-day.webp` | Hero photograph (preloaded for fast first paint) |
-| `public/video/1015.mp4` | Why Sattva video footage. Kept out of `src` so the inlined artifact build stays small |
+| `public/video/useme.mp4` | Why Sattva video footage. Kept out of `src` so the inlined artifact build stays small |
 | `original-artifact/` | Untouched copy of the previous site, for reference |
 | `_backup-dark-version/` | Snapshot of the earlier dark design (`src`, `public`, `index.html`); safe to delete |
 
