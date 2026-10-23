@@ -260,11 +260,9 @@
 
 /* ---------- Motion ---------- */
 /* Hero entrance: waits for the logo intro (html.ready). */
-@media (prefers-reduced-motion: no-preference) {
-  html.js:not(.ready) .rise { opacity: 0; }
-  html.ready .rise { animation: rise 1.2s var(--ease-expo) both; animation-delay: var(--d, 0s); }
-  html.ready .rise-soft { animation-name: rise-soft; }
-}
+html.js:not(.ready) .rise { opacity: 0; }
+html.ready .rise { animation: rise 1.2s var(--ease-expo) both; animation-delay: var(--d, 0s); }
+html.ready .rise-soft { animation-name: rise-soft; }
 @keyframes rise { from { opacity: 0; translate: 0 30px; filter: blur(8px); } }
 /* Glass panels rise without filter so their backdrop blur stays intact. */
 @keyframes rise-soft { from { opacity: 0; translate: 0 30px; } }

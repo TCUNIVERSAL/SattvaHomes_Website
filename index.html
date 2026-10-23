@@ -30,13 +30,13 @@
       }
     </script>
 
-    <!-- Logo intro: shown once per visit, before the app loads, so there is no flash of the page underneath. -->
+    <!-- Logo intro: shown when opening the site, before the app loads, so there is no flash of the page underneath. -->
     <script>
       try {
         document.documentElement.classList.add('js')
-        if (!location.hash && !sessionStorage.getItem('sattva-intro') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        var isLanding = !location.hash || location.hash === '#' || location.hash === '#finder' || location.hash === '#main'
+        if (isLanding) {
           document.documentElement.classList.add('logo-intro-first')
-          sessionStorage.setItem('sattva-intro', '1')
         } else {
           document.documentElement.classList.add('ready')
         }
@@ -72,7 +72,6 @@
       @keyframes logo-light { 0% { opacity: 0; transform: scale(0) } 60% { transform: scale(1.12) } 100% { opacity: 1; transform: none } }
       @keyframes logo-drop { 0% { opacity: 0; transform: translateY(-45px) } 62% { opacity: 1; transform: translateY(0) } 78% { transform: translateY(-3px) } 100% { transform: none } }
       @keyframes logo-letter { 0% { opacity: 0; transform: translateY(-18px) } 65% { opacity: 1; transform: translateY(0) } 82% { transform: translateY(-2px) } 100% { transform: none } }
-      @media (prefers-reduced-motion: reduce) { .sl-new.logo-animate .sl-piece { animation: none !important; opacity: 1; transform: none } .logo-intro { transition: none } }
     </style>
   </head>
   <body>
@@ -108,13 +107,12 @@
 </svg><!-- logo:end -->
     </div>
     <script>
-      // Fades out once the logo is built. Any tap, click, key, scroll or touch skips ahead; the intro is
+      // Fades out once the logo is built. Clicking or pressing Escape/Space/Enter skips ahead; the intro is
       // hidden again once faded, so it never blocks the page.
       ;(function () {
         var root = document.documentElement
         if (!root.classList.contains('logo-intro-first')) return
         var intro = document.querySelector('.logo-intro')
-        var events = ['pointerdown', 'touchstart', 'click', 'keydown', 'wheel']
         var done = false
         var finish = function () {
           if (done) return
@@ -123,20 +121,21 @@
           root.classList.add('ready')
         }
         var leave = function () {
-          events.forEach(function (type) {
-            document.removeEventListener(type, leave)
-            window.removeEventListener(type, leave)
-          })
           if (intro) {
+            intro.removeEventListener('click', leave)
             intro.classList.add('is-leaving')
             intro.addEventListener('transitionend', finish, { once: true })
           }
+          window.removeEventListener('keydown', onKey)
           setTimeout(finish, 450)
         }
-        events.forEach(function (type) {
-          document.addEventListener(type, leave, { passive: true })
-          window.addEventListener(type, leave, { passive: true })
-        })
+        var onKey = function (e) {
+          if (e.key === 'Escape' || e.key === ' ' || e.key === 'Enter') leave()
+        }
+        if (intro) {
+          intro.addEventListener('click', leave)
+        }
+        window.addEventListener('keydown', onKey)
         setTimeout(leave, 3150)
       })()
     </script>

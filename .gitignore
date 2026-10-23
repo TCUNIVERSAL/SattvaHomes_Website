@@ -16,3 +16,7 @@ content_to_use/drone_content/
 _backup-dark-version/
 example_video/
 
+# Audio files
+*.wav
+*sanskrit*
+
