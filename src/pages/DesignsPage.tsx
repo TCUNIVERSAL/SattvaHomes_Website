@@ -255,7 +255,7 @@ function FilterPanel({
 
       <Group label="Storeys">
         {options.storeys.map((o) => (
-          <Chip key={o.value || 'any'} name="f-storeys" checked={filters.storeys === o.value} onChange={() => update({ storeys: o.value })}>
+          <Chip key={o.value || 'all'} name="f-storeys" checked={filters.storeys === o.value} onChange={() => update({ storeys: o.value })}>
             {o.label}
           </Chip>
         ))}
@@ -263,28 +263,28 @@ function FilterPanel({
       <Group label="Bedrooms">
         {options.bed.map((n) => (
           <Chip key={n} name="f-bed" checked={filters.bed === n} onChange={() => update({ bed: n })}>
-            {n ? `${n}+` : 'Any'}
+            {n ? `${n}+` : 'All'}
           </Chip>
         ))}
       </Group>
       <Group label="Bathrooms">
         {options.bath.map((n) => (
           <Chip key={n} name="f-bath" checked={filters.bath === n} onChange={() => update({ bath: n })}>
-            {n ? `${n}+` : 'Any'}
+            {n ? `${n}+` : 'All'}
           </Chip>
         ))}
       </Group>
       <Group label="Car spaces">
         {options.car.map((n) => (
           <Chip key={n} name="f-car" checked={filters.car === n} onChange={() => update({ car: n })}>
-            {n ? `${n}+` : 'Any'}
+            {n ? `${n}+` : 'All'}
           </Chip>
         ))}
       </Group>
       <Group label="My block’s frontage" hint="Its width at the street. We’ll show homes drawn for a block this wide or narrower.">
         {options.block.map((n) => (
           <Chip key={n} name="f-block" checked={filters.block === n} onChange={() => update({ block: n })}>
-            {n ? `${n} m` : 'Any'}
+            {n ? `${n} m` : 'All'}
           </Chip>
         ))}
       </Group>

@@ -30,7 +30,7 @@ export const promises = ['Clarity before commitment', 'Personal, from day one', 
 // Hero home finder. Bedrooms and bathrooms are minimums ("4+"); results open on the home designs page.
 export const finder = {
   storeys: [
-    { value: '', label: 'Any' },
+    { value: '', label: 'All' },
     { value: '1', label: 'Single storey' },
     { value: '2', label: 'Double storey' },
   ],

@@ -6,6 +6,7 @@ import { HomePage } from './pages/HomePage'
 import { DesignsPage } from './pages/DesignsPage'
 import { DesignPage } from './pages/DesignPage'
 import { ComparePage } from './pages/ComparePage'
+import { ModelsPage } from './pages/ModelsPage'
 import { NotFound } from './pages/NotFound'
 import { jumpTo, jumpToElement, useSmoothScroll } from './hooks/useSmoothScroll'
 import { lastList, parseRoute, useHash } from './lib/router'
@@ -59,6 +60,7 @@ export default function App() {
         {route.page === 'designs' && <DesignsPage query={route.query} />}
         {route.page === 'design' && <DesignPage key={route.slug} slug={route.slug} />}
         {route.page === 'compare' && <ComparePage query={route.query} />}
+        {route.page === 'models' && <ModelsPage />}
         {route.page === 'not-found' && <NotFound />}
       </main>
       <Footer />

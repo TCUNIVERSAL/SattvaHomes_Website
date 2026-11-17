@@ -158,13 +158,41 @@
 /* A soft white halo lifts navy type off the sky. */
 .hero-text { text-shadow: 0 1px 24px rgb(255 255 255 / 0.7); }
 
-/* Storeys tabs: underline slides under the active option. */
-.storey-tab { position: relative; padding: 10px 2px; color: var(--color-ink-soft); transition: color .25s; cursor: pointer; }
-.storey-tab::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1.5px; background: var(--color-ink); scale: 0 1; transition: scale .45s var(--ease-expo); }
-.storey-tab:hover { color: var(--color-ink); }
-.storey-tab:has(input:checked) { color: var(--color-ink); font-weight: 600; }
-.storey-tab:has(input:checked)::after { scale: 1 1; }
-.storey-tab:has(input:focus-visible) { outline: 2px solid var(--color-bronze-deep); outline-offset: 4px; border-radius: 4px; }
+/* Storeys segmented control: choices are distinct rounded pill buttons */
+.storey-pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 12px;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+  cursor: pointer;
+  transition: background-color .2s, color .2s, box-shadow .2s;
+  user-select: none;
+}
+@media (min-width: 640px) {
+  .storey-pill {
+    padding: 6px 14px;
+    font-size: 14px;
+  }
+}
+.storey-pill:hover {
+  color: var(--color-ink);
+  background: rgb(255 255 255 / 0.7);
+}
+.storey-pill.is-active,
+.storey-pill:has(input:checked) {
+  background: var(--color-ink);
+  color: #fff;
+  box-shadow: 0 2px 8px -2px rgb(31 43 66 / 0.35);
+}
+.storey-pill:has(input:focus-visible) {
+  outline: 2px solid var(--color-bronze-deep);
+  outline-offset: 2px;
+}
 
 /* Bedroom / bathroom chips: square keys, the active one filled navy. */
 .chip {

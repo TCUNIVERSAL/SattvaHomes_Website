@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import modelPoster from '../assets/images/house-model-poster.webp'
-import { ArrowUpRight, PauseIcon, PlayIcon } from './Icons'
+import { ArrowRight, ArrowUpRight, PauseIcon, PlayIcon } from './Icons'
 
 const modelVideo = `${import.meta.env.BASE_URL}video/final3dvideo.mp4?v=${import.meta.env.VITE_MEDIA_VERSION}`
 
@@ -126,6 +126,9 @@ export function HouseModel() {
                 <p className="eyebrow text-[10px]">The 3D preview</p>
                 <p className="mt-1 font-serif text-[23px] leading-tight">Get to know every detail.</p>
               </div>
+              <a href="#/models" className="btn btn-ink !min-h-[44px] !px-5">
+                Try the model <ArrowRight />
+              </a>
               {videoError && (
                 <p role="status" className="w-full text-sm text-ink-soft">
                   Having trouble playing the preview? <a href={modelVideo} className="link-underline text-ink">Open the video</a>.

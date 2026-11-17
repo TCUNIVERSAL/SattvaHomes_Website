@@ -37,29 +37,42 @@ export function HomeFinder() {
   return (
     <section id="finder" aria-labelledby="finder-title" className="w-full">
       <form className="glass rise rise-soft w-full rounded-[28px] p-2 text-left [--d:.55s]" onSubmit={(e) => e.preventDefault()}>
-        {/* Header row: title + storeys tabs */}
+        {/* Header row: title + storeys segmented control */}
         <div className="flex flex-col gap-3 px-4 pb-2 pt-3 sm:px-5 md:flex-row md:items-center md:justify-between">
           <h2 id="finder-title" className="text-[26px] leading-tight">
             Find your <em>home.</em>
           </h2>
-          <fieldset className="flex flex-wrap items-center gap-x-5 gap-y-1 sm:gap-x-6">
+          <fieldset className="flex flex-wrap items-center gap-2.5 sm:gap-3">
             <legend className="sr-only">Storeys</legend>
-            <span className="eyebrow w-full !text-[10px] !text-ink-soft sm:w-auto" aria-hidden="true">
-              Storeys
+            <span
+              className="eyebrow flex items-center gap-1.5 !text-[11px] !text-ink-soft/90 font-bold tracking-wider select-none cursor-default"
+              aria-hidden="true"
+            >
+              <span>Storeys</span>
+              <span className="text-bronze font-bold">:</span>
             </span>
-            {finder.storeys.map((option) => (
-              <label key={option.value || 'any'} className="storey-tab text-[14px] sm:text-[15px]">
-                <input
-                  type="radio"
-                  name="_type_of_home"
-                  value={option.value}
-                  checked={storeys === option.value}
-                  onChange={() => setStoreys(option.value)}
-                  className="sr-only"
-                />
-                {option.label}
-              </label>
-            ))}
+
+            <div className="inline-flex items-center rounded-full bg-white/60 p-1 border border-ink/10 shadow-xs ring-1 ring-black/5 backdrop-blur-xs">
+              {finder.storeys.map((option) => {
+                const checked = storeys === option.value
+                return (
+                  <label
+                    key={option.value || 'all'}
+                    className={`storey-pill ${checked ? 'is-active' : ''}`}
+                  >
+                    <input
+                      type="radio"
+                      name="_type_of_home"
+                      value={option.value}
+                      checked={checked}
+                      onChange={() => setStoreys(option.value)}
+                      className="sr-only"
+                    />
+                    {option.label}
+                  </label>
+                )
+              })}
+            </div>
           </fieldset>
         </div>
 
@@ -142,7 +155,7 @@ function ChipGroup({
       <legend className="float-left mb-0 text-[13px] font-semibold text-ink-soft">{label}</legend>
       <div className="flex flex-wrap gap-1.5 lg:flex-nowrap">
         {options.map((option) => (
-          <label key={option || 'any'} className="chip">
+          <label key={option || 'all'} className="chip">
             <input
               type="radio"
               name={name}
@@ -151,7 +164,7 @@ function ChipGroup({
               onChange={() => onChange(option)}
               className="sr-only"
             />
-            {option ? `${option}+` : 'Any'}
+            {option ? `${option}+` : 'All'}
           </label>
         ))}
       </div>

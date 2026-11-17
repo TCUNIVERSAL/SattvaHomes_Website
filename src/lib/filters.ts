@@ -10,7 +10,7 @@ export const AREA_RANGE = {
 /** Bedrooms, bathrooms and car spaces are minimums ("4+"): that's how people think about them. */
 export const options = {
   storeys: [
-    { value: '', label: 'Any' },
+    { value: '', label: 'All' },
     { value: '1', label: 'Single' },
     { value: '2', label: 'Double' },
   ],

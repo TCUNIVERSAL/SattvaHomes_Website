@@ -11,6 +11,7 @@ export type Route =
   | { page: 'home'; section: string }
   | { page: 'designs'; query: URLSearchParams }
   | { page: 'design'; slug: string }
+  | { page: 'models' }
   | { page: 'compare'; query: URLSearchParams }
   | { page: 'not-found' }
 
@@ -35,6 +36,7 @@ export function parseRoute(hash: string): Route {
   if (parts.length === 0) return { page: 'home', section: '' }
   if (parts[0] === 'designs' && parts.length === 1) return { page: 'designs', query }
   if (parts[0] === 'designs' && parts.length === 2) return { page: 'design', slug: decodeURIComponent(parts[1]) }
+  if (parts[0] === 'models' && parts.length === 1) return { page: 'models' }
   if (parts[0] === 'compare' && parts.length === 1) return { page: 'compare', query }
   return { page: 'not-found' }
 }
