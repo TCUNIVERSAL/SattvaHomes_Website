@@ -5,7 +5,7 @@ export function Hero() {
   return (
     <section aria-labelledby="hero-title" className="hero relative isolate flex min-h-svh flex-col overflow-clip">
       {/* Photograph + light washes (white only, no dark overlays) */}
-      <div className="absolute inset-0 -z-10" aria-hidden="true">
+      <div className="absolute inset-x-0 top-0 h-[100svh] max-h-[750px] md:inset-0 md:h-full md:max-h-none -z-10" aria-hidden="true">
         <img
           src={heroSrc}
           alt=""
@@ -13,13 +13,13 @@ export function Hero() {
           height={894}
           fetchPriority="high"
           decoding="async"
-          className="hero-photo size-full object-cover object-[center_65%] md:object-center"
+          className="hero-photo size-full object-cover object-[center_28%] md:object-center"
         />
         {/* Morning mist across the sky so navy type reads clearly */}
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(245_247_250/.9)_0%,rgb(245_247_250/.62)_20%,rgb(245_247_250/.18)_42%,transparent_58%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(55%_38%_at_50%_30%,rgb(255_255_255/.6),transparent_72%)]" />
         {/* Fade into the page */}
-        <div className="absolute inset-0 bg-[linear-gradient(0deg,var(--color-paper)_0%,rgb(245_247_250/.55)_14%,transparent_34%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(0deg,var(--color-paper)_0%,rgb(245_247_250/.65)_20%,transparent_50%)] md:bg-[linear-gradient(0deg,var(--color-paper)_0%,rgb(245_247_250/.55)_14%,transparent_34%)]" />
         <div className="hero-shade absolute inset-0 bg-paper" />
       </div>
 
